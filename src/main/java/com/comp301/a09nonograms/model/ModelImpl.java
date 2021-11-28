@@ -107,21 +107,19 @@ public class ModelImpl implements Model {
 
   @Override
   public boolean isSolved() {
-    for (int rowNum = 0; rowNum < tempClues.getHeight(); rowNum++) {
-      int[] rowClues = tempClues.getRowClues(rowNum);
-      if (!lineSolved(rowClues, gameBoard[rowNum])) {
+    for (int row = 0; row < tempClues.getHeight(); row++) {
+      int[] rowClues = tempClues.getRowClues(row);
+      if (!lineSolved(rowClues, gameBoard[row])) {
         return false;
       }
     }
 
-    for (int colNum = 0; colNum < tempClues.getWidth(); colNum++) {
-      int[] colClues = tempClues.getColClues(colNum);
+    for (int col = 0; col < tempClues.getWidth(); col++) {
+      int[] colClues = tempClues.getColClues(col);
       int[] line = new int[tempClues.getHeight()];
-
-      for (int j = 0; j < line.length; j++) {
-        line[j] = gameBoard[j][colNum];
+      for (int i = 0; i < line.length; i++) {
+        line[i] = gameBoard[i][col];
       }
-
       if (!lineSolved(colClues, line)) {
         return false;
       }
