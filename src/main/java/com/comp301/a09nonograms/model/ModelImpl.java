@@ -146,12 +146,6 @@ public class ModelImpl implements Model {
     int lineNum = -1;
     boolean lineUpdated = true;
 
-    for (int i = 0; i < clues.length; i++) {
-      if (clues[i] != 0) {
-        return false;
-      }
-    }
-
     for (int i = 0; i < line.length; i++) {
       if (line[i] == 2) {
         if (lineUpdated) {
@@ -165,9 +159,14 @@ public class ModelImpl implements Model {
           return false;
         }
         clues[lineNum] -= 1;
-      }
-      if (line[i] == 1) {
+      } else if (line[i] == 1) {
         lineUpdated = true;
+      }
+    }
+
+    for (int i = 0; i < clues.length; i++) {
+      if (clues[i] != 0) {
+        return false;
       }
     }
 
