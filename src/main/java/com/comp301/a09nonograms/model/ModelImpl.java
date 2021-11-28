@@ -147,12 +147,12 @@ public class ModelImpl implements Model {
       if (i == 2) {
         if (updated) {
           lineNum++;
-          while(lineNum < clues.length && clues[lineNum] == 0) {
+          while (lineNum < clues.length && clues[lineNum] == 0) {
             lineNum++;
           }
           updated = false;
         }
-        if(lineNum >= clues.length) {
+        if (lineNum >= clues.length) {
           return false;
         }
         clues[lineNum] -= 1;

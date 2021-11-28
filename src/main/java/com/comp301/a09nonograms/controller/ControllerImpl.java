@@ -12,7 +12,7 @@ public class ControllerImpl implements Controller {
   int previous = 0;
 
   public ControllerImpl(Model model) {
-    if(model == null) {
+    if (model == null) {
       throw new IllegalArgumentException();
     }
     this.model = model;
