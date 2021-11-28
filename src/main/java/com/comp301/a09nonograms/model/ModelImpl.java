@@ -117,8 +117,8 @@ public class ModelImpl implements Model {
     for (int col = 0; col < tempClues.getWidth(); col++) {
       int[] colClues = tempClues.getColClues(col);
       int[] line = new int[tempClues.getHeight()];
-      for (int i = 0; i < line.length; i++) {
-        line[i] = gameBoard[i][col];
+      for (int r = 0; r < line.length; r++) {
+        line[r] = gameBoard[r][col];
       }
       if (!lineSolved(colClues, line)) {
         return false;
@@ -142,32 +142,29 @@ public class ModelImpl implements Model {
 
   private boolean lineSolved(int[] clues, int[] line) {
     int lineNum = -1;
-    boolean lineUpdated = true;
-
-    for (int i = 0; i < line.length; i++) {
-      if (line[i] == 2) {
-        if (lineUpdated) {
+    boolean updated = true;
+    for (int i : line) {
+      if (i == 2) {
+        if (updated) {
           lineNum++;
-          while (lineNum < clues.length && clues[lineNum] == 0) {
+          while(lineNum < clues.length && clues[lineNum] == 0) {
             lineNum++;
           }
-          lineUpdated = false;
+          updated = false;
         }
-        if (lineNum >= clues.length) {
+        if(lineNum >= clues.length) {
           return false;
         }
         clues[lineNum] -= 1;
-      } else if (line[i] == 1) {
-        lineUpdated = true;
+      } else if (i == 1) {
+        updated = true;
       }
     }
-
-    for (int i = 0; i < clues.length; i++) {
-      if (clues[i] != 0) {
+    for (int i : clues) {
+      if (i != 0) {
         return false;
       }
     }
-
     return true;
   }
 }

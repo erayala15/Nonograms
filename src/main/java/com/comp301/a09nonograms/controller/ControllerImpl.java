@@ -9,8 +9,12 @@ import java.util.Random;
 public class ControllerImpl implements Controller {
 
   private final Model model;
+  int previous = 0;
 
   public ControllerImpl(Model model) {
+    if(model == null) {
+      throw new IllegalArgumentException();
+    }
     this.model = model;
   }
 
