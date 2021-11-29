@@ -11,6 +11,7 @@ public class ModelImpl implements Model {
 
   public ModelImpl(List<Clues> clues) {
     cluesList = new ArrayList<>();
+    boards = new ArrayList<>();
     cluesList.addAll(clues);
     index = 0;
     observers = new ArrayList<>();
