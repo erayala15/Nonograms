@@ -1,6 +1,7 @@
 package com.comp301.a09nonograms.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ModelImpl implements Model {
@@ -105,27 +106,71 @@ public class ModelImpl implements Model {
     observers.remove(observer);
   }
 
+
   @Override
   public boolean isSolved() {
-    for (int row = 0; row < tempClues.getHeight(); row++) {
+
+    for(int row = 0; row < tempClues.getHeight(); row++) {
       int[] rowClues = tempClues.getRowClues(row);
-      if (!lineSolved(rowClues, gameBoard[row])) {
-        return false;
+      int[] rowBoard = new int[rowClues.length];
+
+      boolean shaded = false;
+      int shadedTiles = 0;
+      int consecutiveTiles = 0;
+
+
+      for(int i=0; i<rowBoard.length; i++) {
+        rowBoard[i] = 0;
       }
+      // building rowBoard
+      for (int i = 0; i < gameBoard[row].length; i++) {
+        int val = gameBoard[row][i];
+        // if shaded
+        if(val == 2) {
+          shaded = true;
+          consecutiveTiles++;
+        }
+        else {
+          if(consecutiveTiles > 0) {
+            rowBoard[i] = consecutiveTiles;
+          } else if(!shaded) {
+            rowBoard[i] = consecutiveTiles;
+          }
+          consecutiveTiles = 0;
+        }
+      }
+
+      // if all are shaded
+      if(consecutiveTiles > 0) {
+        rowBoard[rowBoard.length - 1] = consecutiveTiles;
+      } else if(!shaded) {
+        rowBoard[rowBoard.length - 1] = consecutiveTiles;
+      }
+
+      return Arrays.equals(rowClues, rowBoard);
+
+
     }
 
-    for (int col = 0; col < tempClues.getWidth(); col++) {
-      int[] colClues = tempClues.getColClues(col);
-      int[] line = new int[tempClues.getHeight()];
-      for (int r = 0; r < line.length; r++) {
-        line[r] = gameBoard[r][col];
-      }
-      if (!lineSolved(colClues, line)) {
-        return false;
-      }
-    }
-
-    return true;
+//    for (int row = 0; row < tempClues.getHeight(); row++) {
+//      int[] rowClues = tempClues.getRowClues(row);
+//      if (!lineSolved(rowClues, gameBoard[row])) {
+//        return false;
+//      }
+//    }
+//
+//    for (int col = 0; col < tempClues.getWidth(); col++) {
+//      int[] colClues = tempClues.getColClues(col);
+//      int[] line = new int[tempClues.getHeight()];
+//      for (int r = 0; r < line.length; r++) {
+//        line[r] = gameBoard[r][col];
+//      }
+//      if (!lineSolved(colClues, line)) {
+//        return false;
+//      }
+//    }
+//
+//    return true;
   }
 
   private void setGameBoard(int index) {
