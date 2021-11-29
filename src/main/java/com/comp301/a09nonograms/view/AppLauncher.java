@@ -6,6 +6,7 @@ import com.comp301.a09nonograms.controller.ControllerImpl;
 import com.comp301.a09nonograms.model.Model;
 import com.comp301.a09nonograms.model.ModelImpl;
 import javafx.application.Application;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class AppLauncher extends Application {
@@ -15,9 +16,18 @@ public class AppLauncher extends Application {
     Model model = new ModelImpl(PuzzleLibrary.create());
     Controller controller = new ControllerImpl(model);
 
-    // build UI once
+    GameView view = new GameView(controller);
 
-    // model.addObserver();
-    // stage.se
+    Scene scene = new Scene(view.render());
+    stage.setScene(scene);
+
+    model.addObserver(
+        (Model m) -> {
+          scene.setRoot(view.render());
+          stage.sizeToScene();
+        });
+    // Show the stage
+    stage.setTitle("Nonograms");
+    stage.show();
   }
 }
