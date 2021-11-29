@@ -1,7 +1,6 @@
 package com.comp301.a09nonograms.model;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class ModelImpl implements Model {
@@ -70,7 +69,7 @@ public class ModelImpl implements Model {
 
   @Override
   public int[] getColClues(int index) {
-     return cluesList.get(this.index).getColClues(index);
+    return cluesList.get(this.index).getColClues(index);
   }
 
   @Override
@@ -109,8 +108,6 @@ public class ModelImpl implements Model {
     observers.remove(observer);
   }
 
-
-
   @Override
   public boolean isSolved() {
     boolean rMatching = false;
@@ -145,7 +142,6 @@ public class ModelImpl implements Model {
     }
     return cMatching && rMatching;
   }
-
 
   private void update() {
     for (ModelObserver observer : observers) {

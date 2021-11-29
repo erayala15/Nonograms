@@ -17,8 +17,7 @@ public class AppLauncher extends Application {
 
     // build UI once
 
-
-    //model.addObserver();
-    //stage.se
+    // model.addObserver();
+    // stage.se
   }
 }

@@ -1,7 +1,6 @@
 package com.comp301.a09nonograms.controller;
 
 import com.comp301.a09nonograms.model.Clues;
-import com.comp301.a09nonograms.model.CluesImpl;
 import com.comp301.a09nonograms.model.Model;
 
 import java.util.Random;
