@@ -117,6 +117,8 @@ public class ModelImpl implements Model {
       }
       int[] rowClues = tempClues.getRowClues(row);
       int[] rowBoard = new int[rowClues.length];
+      ArrayList<Integer> nonZero = new ArrayList<>();
+
 
       boolean shaded = false;
       int shadedTiles = 0;
@@ -125,6 +127,13 @@ public class ModelImpl implements Model {
 
       for(int i=0; i<rowBoard.length; i++) {
         rowBoard[i] = 0;
+      }
+
+      // builds nonZero ArrayList
+      for(int i = 0; i < gameBoard[row].length; i++) {
+        if(gameBoard[row][i] != 0) {
+          nonZero.add(gameBoard[row][i]);
+        }
       }
       // building rowBoard
       for (int i = 0; i < gameBoard[row].length; i++) {
@@ -137,9 +146,10 @@ public class ModelImpl implements Model {
         else {
           if(consecutiveTiles > 0) {
             rowBoard[i] = consecutiveTiles;
-          } else if(!shaded) {
-            rowBoard[i] = consecutiveTiles;
           }
+//          else if(!shaded) {
+//            rowBoard[i] = consecutiveTiles;
+//          }
           consecutiveTiles = 0;
         }
       }
