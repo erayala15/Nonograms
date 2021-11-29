@@ -161,7 +161,16 @@ public class ModelImpl implements Model {
         rowBoard[rowBoard.length - 1] = consecutiveTiles;
       }
 
-      solved = Arrays.equals(rowClues, rowBoard);
+      // different lengths
+      if(rowClues.length != nonZero.size()) {
+        return false;
+      }
+
+      ArrayList<Integer> clone = new ArrayList<>();
+      for (int i : rowBoard) {
+        clone.add(i);
+      }
+      solved = nonZero.equals(clone);
 
     }
     return solved;
