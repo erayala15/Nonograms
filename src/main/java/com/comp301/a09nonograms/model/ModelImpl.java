@@ -14,8 +14,8 @@ public class ModelImpl implements Model {
     cluesList.addAll(clues);
     index = 0;
     observers = new ArrayList<>();
-    for (Clues value : cluesList) {
-      boards.add(new BoardImpl(value.getHeight(), value.getWidth()));
+    for (int i = 0; i < cluesList.size(); i++) {
+      boards.add(new BoardImpl(cluesList.get(i).getHeight(), cluesList.get(i).getWidth()));
     }
   }
 
