@@ -4,73 +4,56 @@ import java.util.HashMap;
 import java.util.Objects;
 
 public class BoardImpl implements Board {
-  private final HashMap<int[], String> board;
-  private final int size;
+  int[][] board;
 
-  public BoardImpl(int size) {
-    this.size = size;
-    board = new HashMap<>();
-    int i = 1;
-    while (i <= size) {
-      for (int j = 1; j <= size; j++) {
-        board.put(new int[] {i, j}, "Space");
+  public BoardImpl(int height, int width) {
+    board = new int[height][width];
+    for(int i=0; i<board.length; i++) {
+      for(int j=0; j<board[i].length; j++) {
+        board[i][j] = 0;
       }
-      i++;
     }
   }
 
   @Override
   public boolean isShaded(int row, int col) {
-    if (!board.containsKey(new int[] {row, col})) {
-      throw new IllegalArgumentException();
-    } else return Objects.equals(board.get(new int[] {row, col}), "Shaded");
+    return board[row][col] == 1;
   }
 
   @Override
   public boolean isEliminated(int row, int col) {
-    if (!board.containsKey(new int[] {row, col})) {
-      throw new IllegalArgumentException();
-    } else return Objects.equals(board.get(new int[]{row, col}), "Eliminated");
+    return board[row][col] == 2;
   }
 
   @Override
   public boolean isSpace(int row, int col) {
-    if (!board.containsKey(new int[] {row, col})) {
-      throw new IllegalArgumentException();
-    } else return Objects.equals(board.get(new int[]{row, col}), "Space");
+    return board[row][col] == 0;
   }
 
   @Override
   public void toggleCellShaded(int row, int col) {
-    if (!board.containsKey(new int[] {row, col})) {
-      throw new IllegalArgumentException();
+    if(isShaded(row, col)) {
+      board[row][col] = 0;
+    } else {
+      board[row][col] = 1;
     }
-    if (Objects.equals(board.get(new int[] {row, col}), "Shaded")) {
-      return;
-    }
-    board.replace(new int[] {row, col}, "Shaded");
   }
 
   @Override
   public void toggleCellEliminated(int row, int col) {
-    if (!board.containsKey(new int[] {row, col})) {
-      throw new IllegalArgumentException();
+    if(isEliminated(row, col)) {
+      board[row][col] = 0;
+    } else {
+      board[row][col] = 2;
     }
-    if (Objects.equals(board.get(new int[] {row, col}), "Eliminated")) {
-      return;
-    }
-    board.replace(new int[] {row, col}, "Eliminated");
   }
 
   @Override
   public void clear() {
-    board.clear();
-    int i = 1;
-    while (i <= this.size) {
-      for (int j = 1; j <= this.size; j++) {
-        board.put(new int[] {i, j}, "Space");
+    for(int i=0; i<board.length; i++) {
+      for(int j=0; j<board[i].length; j++) {
+        board[i][j] = 0;
       }
-      i++;
     }
   }
 }

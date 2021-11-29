@@ -7,9 +7,7 @@ import com.comp301.a09nonograms.model.Model;
 import java.util.Random;
 
 public class ControllerImpl implements Controller {
-
   private final Model model;
-  int previous = 0;
 
   public ControllerImpl(Model model) {
     if (model == null) {
@@ -20,16 +18,7 @@ public class ControllerImpl implements Controller {
 
   @Override
   public Clues getClues() {
-    int[][] cluesRow = new int[model.getHeight()][model.getRowCluesLength()];
-    int[][] cluesCol = new int[model.getWidth()][model.getColCluesLength()];
-    for (int i = 0; i < model.getHeight(); i++) {
-      cluesRow[i] = model.getRowClues(i);
-    }
-    for (int i = 0; i < model.getWidth(); i++) {
-      cluesCol[i] = model.getColClues(i);
-    }
-    Clues newClues = new CluesImpl(cluesRow, cluesCol);
-    return newClues;
+    return model.getClues();
   }
 
   @Override
@@ -61,8 +50,10 @@ public class ControllerImpl implements Controller {
   public void nextPuzzle() {
     int pIndex = model.getPuzzleIndex();
     int pCount = model.getPuzzleCount();
-    if (pIndex < pCount) {
+    if (pIndex + 1 < pCount) {
       model.setPuzzleIndex(pIndex + 1);
+    } else {
+      throw new IllegalArgumentException();
     }
   }
 
@@ -71,6 +62,8 @@ public class ControllerImpl implements Controller {
     int pIndex = model.getPuzzleIndex();
     if (pIndex > 0) {
       model.setPuzzleIndex(pIndex - 1);
+    } else {
+      throw new IllegalArgumentException();
     }
   }
 

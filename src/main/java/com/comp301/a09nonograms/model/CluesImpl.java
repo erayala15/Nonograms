@@ -3,44 +3,46 @@ package com.comp301.a09nonograms.model;
 public class CluesImpl implements Clues {
   int width;
   int height;
-  int[][] cluesRow;
-  int[][] cluesColumn;
+  int[][] rowClues;
+  int[][] colClues;
 
-  public CluesImpl(int[][] cluesRow, int[][] cluesColumn) {
-    if (cluesRow == null || cluesColumn == null) {
+  public CluesImpl(int[][] rowClues, int[][] colClues) {
+    if (rowClues == null || colClues == null) {
       throw new IllegalArgumentException();
     }
-    this.cluesRow = cluesRow;
-    this.cluesColumn = cluesColumn;
+    this.rowClues = rowClues;
+    this.colClues = colClues;
+    this.width = colClues.length;
+    this.height = rowClues.length;
   }
 
   @Override
   public int getWidth() {
-    return cluesColumn.length;
+    return width;
   }
 
   @Override
   public int getHeight() {
-    return cluesRow.length;
+    return height;
   }
 
   @Override
   public int[] getRowClues(int index) {
-    return cluesRow[index];
+    return rowClues[index];
   }
 
   @Override
   public int[] getColClues(int index) {
-    return cluesColumn[index];
+    return colClues[index];
   }
 
   @Override
   public int getRowCluesLength() {
-    return cluesRow[0].length;
+    return rowClues[0].length;
   }
 
   @Override
   public int getColCluesLength() {
-    return cluesColumn[0].length;
+    return colClues[0].length;
   }
 }

@@ -21,4 +21,6 @@ public interface Model extends Board, Clues {
 
   /** Returns true only if the active puzzle is solved */
   boolean isSolved();
+
+  Clues getClues();
 }
