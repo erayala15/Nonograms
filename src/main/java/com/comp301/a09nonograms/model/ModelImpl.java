@@ -110,7 +110,11 @@ public class ModelImpl implements Model {
   @Override
   public boolean isSolved() {
 
+    boolean solved = true;
     for(int row = 0; row < tempClues.getHeight(); row++) {
+      if(!solved) {
+        return false;
+      }
       int[] rowClues = tempClues.getRowClues(row);
       int[] rowBoard = new int[rowClues.length];
 
@@ -147,30 +151,10 @@ public class ModelImpl implements Model {
         rowBoard[rowBoard.length - 1] = consecutiveTiles;
       }
 
-      return Arrays.equals(rowClues, rowBoard);
-
+      solved = Arrays.equals(rowClues, rowBoard);
 
     }
-
-//    for (int row = 0; row < tempClues.getHeight(); row++) {
-//      int[] rowClues = tempClues.getRowClues(row);
-//      if (!lineSolved(rowClues, gameBoard[row])) {
-//        return false;
-//      }
-//    }
-//
-//    for (int col = 0; col < tempClues.getWidth(); col++) {
-//      int[] colClues = tempClues.getColClues(col);
-//      int[] line = new int[tempClues.getHeight()];
-//      for (int r = 0; r < line.length; r++) {
-//        line[r] = gameBoard[r][col];
-//      }
-//      if (!lineSolved(colClues, line)) {
-//        return false;
-//      }
-//    }
-//
-//    return true;
+    return solved;
   }
 
   private void setGameBoard(int index) {
